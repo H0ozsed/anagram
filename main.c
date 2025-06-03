@@ -7,6 +7,7 @@ int option_error(int ac, char **av)
         write(2, "Error: not enough arguments.", 28);
         return 84;
     }
+    return 0;
 }
 
 int my_strlen(char *sent)
@@ -18,19 +19,12 @@ int my_strlen(char *sent)
     return count;
 }
 
-char *dowm_case(char *sent)
+char *dowm_case(char sent[])
 {
-    int len = my_strlen(sent);
-    char sentence[len];
-    int d = 0;
-
     for (int i = 0; sent[i] != '\0'; i++) {
         if (sent[i] >= 65 && sent[i] <= 90) {
-            sentence[d] =+ sent[i] + 32;
-            d++;
+            sent[i] += 32;
         }
-        sentence[d] =+ sent[i];
-        d++;
     }
   return sent;
 }
@@ -41,11 +35,9 @@ int count_char(char *av1, char *av2)
     int char2 = 0;
 
     for (int i = 0; av1[i] != '\0'; i++) {
-        char1 =+ av1[i];
-        char2 =+ av2[i];
+        char1 += av1[i];
+        char2 += av2[i];
     }
-    printf("%d\n", char1);
-    printf("%d\n", char2);
     if (char1 == char2) {
         write(1, "anagrams!\n", 10);
     } else { 
